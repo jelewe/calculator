@@ -1,0 +1,65 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Silkscreen', cursive;
+    background: rgba(24, 71, 143, 0.685);
+}
+
+.container {
+    display: flex;
+   flex-wrap: wrap; 
+   gap: 12px;
+    height: auto;
+    width: 450px;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 25px;
+    margin-top: 50px;
+    background: rgb(218, 215, 215);
+}
+
+.display {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 25px;
+    border: 2px solid black;
+    background: rgb(189, 187, 187);
+    border-radius: 4px;
+    height: 30px;
+    width: 100%;
+    padding: 5px 5px;
+}
+
+button {
+    font-family: 'Silkscreen', cursive;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    height: 45px;
+    width: 45px;
+    padding: 5px 5px;
+}
+
+button:hover {
+    cursor: pointer;
+    background: grey;
+    transition: 0.07ms;
+}
+
+.allClear {
+    flex-basis: 80.5%;
+}
+
+.digit {
+    flex-basis: 25%;
+}
+
+.zero {
+    flex-basis: 80.5%;
+
+}
+
