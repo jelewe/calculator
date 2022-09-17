@@ -38,7 +38,7 @@ function allClear() {
     displayScreen.innerText ="";
 };
 
-//stores operation entered to be called upon pressing '='
+//stores operation entered to be called upon either when pressing '=' or entering new integer
 function operatorFunction() {
     if (firstOperand !== null) {
             equalsFunction();
@@ -47,15 +47,6 @@ function operatorFunction() {
         operation = this.id;
         firstOperand = Number(previousNum);
         previousNum = "";
-        if (operation === "divide") {
-            displayScreen.innerText = `${firstOperand} ÷`;
-        } else if (operation=== "multiply") {
-            displayScreen.innerText = `${firstOperand} ×`;
-         } else if (operation === "subtract") {
-            displayScreen.innerText = `${firstOperand} -`;
-        } else {
-            displayScreen.innerText = `${firstOperand} +`;
-        }
     }
 };
 
@@ -69,13 +60,14 @@ function equalsFunction() {
         subtract(firstOperand,secondOperand);
     } else if (operation === "multiply") {
        multiply(firstOperand,secondOperand);
-    }else {
+    }else if (operation === "divide" ) {
         if (secondOperand === 0) {
             displayScreen.innerText = "beep boop cannot compute";
         } else {
         divide(firstOperand,secondOperand);
         }
     }
+    operation = null;
 };
 
 //operation functions below
@@ -84,7 +76,6 @@ function add(num1, num2) {
     sum = num1 + num2;
     displayScreen.innerText = sum;
     firstOperand = sum;
-    console.log(firstOperand);
     return firstOperand;
 };
 
@@ -93,7 +84,6 @@ function subtract(num1, num2) {
     difference = num1 - num2;
     displayScreen.innerText = difference;
     firstOperand = difference;
-    console.log(firstOperand);
     return firstOperand;
 };
 
@@ -102,7 +92,6 @@ function multiply(num1, num2) {
     product = num1 * num2;
     displayScreen.innerText = product;
     firstOperand = product;
-    console.log(firstOperand);
     return firstOperand;
 };
 
@@ -111,6 +100,5 @@ function divide(num1,num2) {
     quotient = num1 / num2;
     displayScreen.innerText = quotient;
     firstOperand = quotient;
-    console.log(firstOperand);
     return firstOperand;
 };
