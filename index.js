@@ -1,16 +1,16 @@
 let allClearButton = document.querySelector('.allClear').addEventListener('click', allClear);
 
-let operation = ""; //this variable holds the operation (add, divide, etc) selected
-let firstOperand = ""; //this value holds the previous number so previousNum can be cleared for reuse
+let operation = null; //holds the operation (add, divide, etc) selected
+let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
 let operatorButtons = document.querySelectorAll('.operator');
     operatorButtons.forEach(operator => {
         operator.addEventListener('click', operatorFunction)
     });
 
 let equalButton = document.querySelector('.equals').addEventListener('click', equalsFunction);
-let secondOperand = ""; //this value holds the second number entered so previousNum can be cleared for reuse
+let secondOperand = null; //holds the second number entered so it can be operated on, and previousNum can be cleared for reuse
 
-let displayValue = ""; //this variable holds the value of number currently entered
+let numValue = ""; //this variable holds the value of number currently entered
 let previousNum = ""; //this variable holds previously entered number value as a string
 let displayScreen = document.querySelector('.display');
 let digits = document.querySelectorAll('.digit');
@@ -23,8 +23,8 @@ function displayFunction() {
     if (previousNum.length > 22) {
         return previousNum;
     } else {
-    displayValue = this.value;
-    displayScreen.innerText = previousNum + displayValue;
+    numValue = this.value;
+    displayScreen.innerText = previousNum + numValue;
     previousNum = displayScreen.innerText;
     }
     return previousNum;
@@ -32,38 +32,37 @@ function displayFunction() {
 
 function allClear() {
     previousNum ="";
-    firstOperand ="";
-    secondOperand = "";
-    operation = "";
+    firstOperand =null;
+    secondOperand = null;
+    operation = null;
     displayScreen.innerText ="";
 };
 
 //stores operation entered to be called upon pressing '='
 function operatorFunction() {
-    firstOperand = Number(previousNum);
-    previousNum = "";
-    if (this.className === "operator divide") {
-        displayScreen.innerText = `${firstOperand} ÷`;
-        operation = "divide";
-        return operation;
-    } else if (this.className === "operator multiply") {
-        displayScreen.innerText = `${firstOperand} ×`;
-        operation = "multiply";
-        return operation;
-    } else if (this.className === "operator subtract") {
-        displayScreen.innerText = `${firstOperand} -`;
-        operation = "subtract";
-        return operation;
+    if (firstOperand !== null) {
+            equalsFunction();
+            operation = this.id;
     } else {
-        displayScreen.innerText = `${firstOperand} +`;
-        operation = "add"
-        return operation;
+        operation = this.id;
+        firstOperand = Number(previousNum);
+        previousNum = "";
+        if (operation === "divide") {
+            displayScreen.innerText = `${firstOperand} ÷`;
+        } else if (operation=== "multiply") {
+            displayScreen.innerText = `${firstOperand} ×`;
+         } else if (operation === "subtract") {
+            displayScreen.innerText = `${firstOperand} -`;
+        } else {
+            displayScreen.innerText = `${firstOperand} +`;
+        }
     }
 };
 
 //calls correct operation function and clears previous value variable so user can enter more numbers without having to 'all clear'
 function equalsFunction() {
     let secondOperand = Number(previousNum);
+    previousNum = "";
     if (operation === "add") {
         add(firstOperand,secondOperand);
     } else if (operation === "subtract") {
@@ -71,9 +70,12 @@ function equalsFunction() {
     } else if (operation === "multiply") {
        multiply(firstOperand,secondOperand);
     }else {
+        if (secondOperand === 0) {
+            displayScreen.innerText = "beep boop cannot compute";
+        } else {
         divide(firstOperand,secondOperand);
+        }
     }
-    previousNum = "";
 };
 
 //operation functions below
@@ -81,22 +83,34 @@ function add(num1, num2) {
     let sum;
     sum = num1 + num2;
     displayScreen.innerText = sum;
+    firstOperand = sum;
+    console.log(firstOperand);
+    return firstOperand;
 };
 
 function subtract(num1, num2) {
     let difference;
     difference = num1 - num2;
     displayScreen.innerText = difference;
+    firstOperand = difference;
+    console.log(firstOperand);
+    return firstOperand;
 };
 
 function multiply(num1, num2) {
     let product;
     product = num1 * num2;
     displayScreen.innerText = product;
+    firstOperand = product;
+    console.log(firstOperand);
+    return firstOperand;
 };
 
 function divide(num1,num2) {
     let quotient;
     quotient = num1 / num2;
     displayScreen.innerText = quotient;
+    firstOperand = quotient;
+    console.log(firstOperand);
+    return firstOperand;
 };
