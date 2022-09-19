@@ -74,7 +74,12 @@ function equalsFunction() {
 function add(num1, num2) {
     let sum;
     sum = num1 + num2;
-    displayScreen.innerText = sum;
+    if (sum.length < 15) {
+        displayScreen.innerText = sum;
+    } else {
+        sum = String(sum).slice(0,15);
+        displayScreen.innerText = Number(sum);
+    }; 
     firstOperand = sum;
     return firstOperand;
 };
@@ -82,7 +87,12 @@ function add(num1, num2) {
 function subtract(num1, num2) {
     let difference;
     difference = num1 - num2;
-    displayScreen.innerText = difference;
+    if (difference.length < 15) {
+        displayScreen.innerText = difference
+    } else {
+        difference = String(difference).slice(0,15);
+        displayScreen.innerText = Number(difference);
+    }; 
     firstOperand = difference;
     return firstOperand;
 };
@@ -90,7 +100,12 @@ function subtract(num1, num2) {
 function multiply(num1, num2) {
     let product;
     product = num1 * num2;
-    displayScreen.innerText = product;
+    if (product.length < 15) {
+        displayScreen.innerText = product;
+    } else {
+        product = String(product).slice(0,15);
+        displayScreen.innerText = Number(product);
+    }; 
     firstOperand = product;
     return firstOperand;
 };
@@ -98,7 +113,12 @@ function multiply(num1, num2) {
 function divide(num1,num2) {
     let quotient;
     quotient = num1 / num2;
-    displayScreen.innerText = quotient;
+    if (quotient.length < 15) {
+        displayScreen.innerText = quotient;
+    } else {
+        quotient = String(quotient).slice(0,15);
+        displayScreen.innerText = Number(quotient);
+    }; 
     firstOperand = quotient;
     return firstOperand;
 };
