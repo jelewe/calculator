@@ -6,25 +6,6 @@ body {
     padding: 50px;
 }
 
-/*.bmo {
-    position: relative;
-	width: 500px;
-    height: 700px
-}
-.bmoTop {
-    background: #2cbeb3;
-    height: 654px;
-    width: 454px;
-    position: absolute;
-    transform: skew(-2deg) translate(10px, -20px);
-}
-.bmoSide {
-    background: #458b83;
-    height: 654px;
-    width: 454px;
-    position: absolute;
-}*/
-
 .container {
     display: flex;
    flex-wrap: wrap; 
@@ -34,7 +15,7 @@ body {
     height: 600px;
     width: 400px;
     border: 2px solid black;
-    border-radius: 4px;
+    border-radius: 5%;
     padding: 25px;
     background:#3da49c;
 }
@@ -73,7 +54,16 @@ button:hover {
 }
 
 .allClear {
-    flex-basis: 80.5%;
+    flex-basis: 66.5%;
+    background: #002b2a;
+    color: #197774;
+}
+
+#backspace {
+    background:#000892;
+    color:#505bf4;
+    border-radius: 50%;
+    margin-left: 50px;
 }
 
 .digit {
@@ -81,6 +71,95 @@ button:hover {
 }
 
 .zero {
-    flex-basis: 80.5%;
+    flex-basis: 81%;
+}
 
+#add {
+    background: #FFD300;
+      height: 100px;
+      position: relative;
+      width: 20px;
+      margin-right: 40px;
+      margin-left: 30px;
+    }
+    #add:after {
+      background:#FFD300;
+      content: "+";
+      height: 20px;
+      left: -40px;
+      position: absolute;
+      top: 40px;
+      width: 100px;
+      border-radius: 5px;
+    }
+    #add:hover {
+        background: #C69704;
+    }
+    #add:hover::after{
+        background: #C69704;
+    }
+
+#subtract {
+    background: #00a4e0;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+    #subtract:hover {
+    background: #0067B7;
+}
+
+#multiply {
+    background: #00C418;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+#multiply:hover {
+    background: #006132;
+}
+
+#divide {
+    background: #00C418;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+#divide:hover {
+    background: #006132;
+}
+
+#sign {
+    background:#000892;
+    color:#505bf4;
+    height: 30px;
+    width: 80px;
+    border-radius:35%;
+    margin-top: 10px;
+}
+#decimal {
+    background:#000892;
+    color:#505bf4;
+    height: 30px;
+    width: 80px;
+    border-radius:35%;
+    margin-top: 10px;
+}
+.equals {
+    background: #f20553;
+    font-size: 30px;
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    margin-left: 60px;
+}
+.equals:hover{
+    background: #a70f42;
 }

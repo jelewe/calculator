@@ -1,5 +1,7 @@
 let allClearButton = document.querySelector('.allClear').addEventListener('click', allClear);
 
+let decimalButton = document.querySelector('#decimal').addEventListener('click', addDecimal);
+
 let operation = null; //holds the operation (add, divide, etc) selected
 let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
 let operatorButtons = document.querySelectorAll('.operator');
@@ -38,6 +40,15 @@ function allClear() {
     displayScreen.innerText ="";
 };
 
+function addDecimal() {
+    if (displayScreen.innerText.includes(".")) {
+        return;
+    } else {
+        displayScreen.innerText = previousNum + ".";
+        previousNum = displayScreen.innerText;
+    }
+}
+
 //stores operation entered to be called upon either when pressing '=' or entering new integer
 function operatorFunction() {
     if (firstOperand !== null) {
@@ -45,7 +56,11 @@ function operatorFunction() {
             operation = this.id;
     } else {
         operation = this.id;
-        firstOperand = Number(previousNum);
+        if (previousNum.includes(".")) {
+            firstOperand = parseFloat(previousNum);
+        } else {
+            firstOperand = Number(previousNum);
+        }
         previousNum = "";
     }
 };
@@ -78,9 +93,9 @@ function add(num1, num2) {
         displayScreen.innerText = sum;
     } else {
         sum = String(sum).slice(0,15);
-        displayScreen.innerText = Number(sum);
+        displayScreen.innerText = sum;
     }; 
-    firstOperand = sum;
+    firstOperand = Number(sum);
     return firstOperand;
 };
 
@@ -91,9 +106,9 @@ function subtract(num1, num2) {
         displayScreen.innerText = difference
     } else {
         difference = String(difference).slice(0,15);
-        displayScreen.innerText = Number(difference);
+        displayScreen.innerText = difference;
     }; 
-    firstOperand = difference;
+    firstOperand = Number(difference);
     return firstOperand;
 };
 
@@ -104,9 +119,9 @@ function multiply(num1, num2) {
         displayScreen.innerText = product;
     } else {
         product = String(product).slice(0,15);
-        displayScreen.innerText = Number(product);
+        displayScreen.innerText = product;
     }; 
-    firstOperand = product;
+    firstOperand = Number(product)
     return firstOperand;
 };
 
@@ -117,8 +132,8 @@ function divide(num1,num2) {
         displayScreen.innerText = quotient;
     } else {
         quotient = String(quotient).slice(0,15);
-        displayScreen.innerText = Number(quotient);
+        displayScreen.innerText = quotient;
     }; 
-    firstOperand = quotient;
+    firstOperand = Number(quotient);
     return firstOperand;
 };
