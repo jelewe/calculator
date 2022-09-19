@@ -63,7 +63,7 @@ button:hover {
     background:#000892;
     color:#505bf4;
     border-radius: 50%;
-    margin-left: 50px;
+    margin-left: 30px;
 }
 
 .digit {
@@ -140,7 +140,7 @@ button:hover {
     background:#000892;
     color:#505bf4;
     height: 30px;
-    width: 80px;
+    width: 70px;
     border-radius:35%;
     margin-top: 10px;
 }
@@ -148,7 +148,7 @@ button:hover {
     background:#000892;
     color:#505bf4;
     height: 30px;
-    width: 80px;
+    width: 70px;
     border-radius:35%;
     margin-top: 10px;
 }
@@ -158,7 +158,7 @@ button:hover {
     border-radius: 50%;
     height: 90px;
     width: 90px;
-    margin-left: 60px;
+    margin-left: 80px;
 }
 .equals:hover{
     background: #a70f42;

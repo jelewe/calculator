@@ -1,26 +1,26 @@
-let allClearButton = document.querySelector('.allClear').addEventListener('click', allClear);
-
-let decimalButton = document.querySelector('#decimal').addEventListener('click', addDecimal);
-
-let operation = null; //holds the operation (add, divide, etc) selected
-let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
-let operatorButtons = document.querySelectorAll('.operator');
+//button selectors below
+const allClearButton = document.querySelector('.allClear').addEventListener('click', allClear);
+const backButton = document.querySelector('#backspace').addEventListener('click', backSpace);
+const decimalButton = document.querySelector('#decimal').addEventListener('click', addDecimal);
+const signButton = document.querySelector('#sign').addEventListener('click',changeSign);
+const operatorButtons = document.querySelectorAll('.operator');
     operatorButtons.forEach(operator => {
         operator.addEventListener('click', operatorFunction)
     });
-
-let equalButton = document.querySelector('.equals').addEventListener('click', equalsFunction);
-let secondOperand = null; //holds the second number entered so it can be operated on, and previousNum can be cleared for reuse
-
-let numValue = ""; //this variable holds the value of number currently entered
-let previousNum = ""; //this variable holds previously entered number value as a string
-let displayScreen = document.querySelector('.display');
-let digits = document.querySelectorAll('.digit');
+const equalButton = document.querySelector('.equals').addEventListener('click', equalsFunction);
+const digits = document.querySelectorAll('.digit');
     digits.forEach(digit => {
         digit.addEventListener('click', displayFunction)
 });
 
-//displays digits selected, based off fibonacci algorithm
+//global variables defined below
+const displayScreen = document.querySelector('.display');
+let operation = null; //holds the operation (add, divide, etc) selected
+let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
+let numValue = ""; //this variable holds the value of number currently entered
+let previousNum = ""; //this variable holds previously entered number value as a string
+
+//displays digits selected
 function displayFunction() {
     if (previousNum.length > 14) {
         return previousNum;
@@ -33,21 +33,42 @@ function displayFunction() {
 };
 
 function allClear() {
-    previousNum ="";
-    firstOperand =null;
-    secondOperand = null;
+    previousNum = "";
+    firstOperand = null;
     operation = null;
-    displayScreen.innerText ="";
+    displayScreen.innerText = "";
 };
 
+function backSpace() {
+
+
+}
+
 function addDecimal() {
-    if (displayScreen.innerText.includes(".")) {
+    if (previousNum.includes(".")) {
         return;
     } else {
         displayScreen.innerText = previousNum + ".";
         previousNum = displayScreen.innerText;
     }
-}
+};
+
+function changeSign() {
+    if (displayScreen.innerText.includes("-")) {
+        displayScreen.innerText = displayScreen.innerText.replace(/\W/, "");
+            if (firstOperand !== null) {
+                firstOperand = Math.abs(firstOperand);
+            }
+    } else {
+        displayScreen.innerText = "-" + displayScreen.innerText;
+            if (previousNum !== "") {
+                previousNum = -Math.abs(previousNum);
+                previousNum = previousNum.toString();
+            } else if (firstOperand !== null) {
+                firstOperand = -Math.abs(firstOperand);
+            }
+    }
+};
 
 //stores operation entered to be called upon either when pressing '=' or entering new integer
 function operatorFunction() {
@@ -65,7 +86,6 @@ function operatorFunction() {
     }
 };
 
-//clears 'previousNum' & 'operation' so user can input more numbers/operations without having to 'all clear' or have operation defined by first operation entered - then calls current operation function
 function equalsFunction() {
     let secondOperand = Number(previousNum);
     previousNum = "";
@@ -137,3 +157,5 @@ function divide(num1,num2) {
     firstOperand = Number(quotient);
     return firstOperand;
 };
+
+displayScreen.innerText = `..........(^_^)...........`;
