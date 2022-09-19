@@ -20,7 +20,7 @@ let digits = document.querySelectorAll('.digit');
 
 //displays digits selected, based off fibonacci algorithm
 function displayFunction() {
-    if (previousNum.length > 22) {
+    if (previousNum.length > 14) {
         return previousNum;
     } else {
     numValue = this.value;
@@ -50,7 +50,7 @@ function operatorFunction() {
     }
 };
 
-//calls correct operation function and clears previous value variable so user can enter more numbers without having to 'all clear'
+//clears 'previousNum' & 'operation' so user can input more numbers/operations without having to 'all clear' or have operation defined by first operation entered - then calls current operation function
 function equalsFunction() {
     let secondOperand = Number(previousNum);
     previousNum = "";
