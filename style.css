@@ -37,6 +37,7 @@ body {
 
 button {
     font-family: 'Silkscreen', cursive;
+    background: #5ecfc6;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -49,7 +50,7 @@ button {
 
 button:hover {
     cursor: pointer;
-    background: grey;
+    background: #48ada5;
     transition: 0.07ms;
 }
 

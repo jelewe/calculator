@@ -22,7 +22,7 @@ let previousNum = ""; //this variable holds previously entered number value as a
 
 //displays digits selected
 function displayFunction() {
-    if (previousNum.length > 14) {
+if (previousNum.length > 12) {
         return previousNum;
     } else {
     numValue = this.value;
@@ -40,9 +40,17 @@ function allClear() {
 };
 
 function backSpace() {
-
-
-}
+    let newText;
+    if (firstOperand === null) {
+        newText = displayScreen.innerText.slice(0,-1);
+        displayScreen.innerText = newText;
+        previousNum = displayScreen.innerText;
+    } else {
+        newText = String(firstOperand).slice(0,-1);
+        displayScreen.innerText = newText
+        firstOperand = Number(newText);
+    }
+};
 
 function addDecimal() {
     if (previousNum.includes(".")) {
@@ -109,10 +117,10 @@ function equalsFunction() {
 function add(num1, num2) {
     let sum;
     sum = num1 + num2;
-    if (sum.length < 15) {
+    if (sum.length < 13) {
         displayScreen.innerText = sum;
     } else {
-        sum = String(sum).slice(0,15);
+        sum = String(sum).slice(0,13);
         displayScreen.innerText = sum;
     }; 
     firstOperand = Number(sum);
@@ -122,10 +130,10 @@ function add(num1, num2) {
 function subtract(num1, num2) {
     let difference;
     difference = num1 - num2;
-    if (difference.length < 15) {
+    if (difference.length < 13) {
         displayScreen.innerText = difference
     } else {
-        difference = String(difference).slice(0,15);
+        difference = String(difference).slice(0,13);
         displayScreen.innerText = difference;
     }; 
     firstOperand = Number(difference);
@@ -135,10 +143,10 @@ function subtract(num1, num2) {
 function multiply(num1, num2) {
     let product;
     product = num1 * num2;
-    if (product.length < 15) {
+    if (product.length < 13) {
         displayScreen.innerText = product;
     } else {
-        product = String(product).slice(0,15);
+        product = String(product).slice(0,13);
         displayScreen.innerText = product;
     }; 
     firstOperand = Number(product)
@@ -148,14 +156,14 @@ function multiply(num1, num2) {
 function divide(num1,num2) {
     let quotient;
     quotient = num1 / num2;
-    if (quotient.length < 15) {
+    if (quotient.length < 13) {
         displayScreen.innerText = quotient;
     } else {
-        quotient = String(quotient).slice(0,15);
+        quotient = String(quotient).slice(0,13);
         displayScreen.innerText = quotient;
     }; 
     firstOperand = Number(quotient);
     return firstOperand;
 };
 
-displayScreen.innerText = `..........(^_^)...........`;
+displayScreen.innerText = `........(^_^).........`;
