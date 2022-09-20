@@ -17,17 +17,21 @@ const digits = document.querySelectorAll('.digit');
 const displayScreen = document.querySelector('.display');
 let operation = null; //holds the operation (add, divide, etc) selected
 let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
-let numValue = ""; //this variable holds the value of number currently entered
-let previousNum = ""; //this variable holds previously entered number value as a string
+let numValue = ""; //holds the value of number currently entered
+let previousNum = ""; //holds previously entered number value as a string
+let total = null;
 
 //displays digits selected
 function displayFunction() {
-if (previousNum.length > 12) {
+    if (previousNum.length > 12) {
         return previousNum;
     } else {
-    numValue = this.value;
-    displayScreen.innerText = previousNum + numValue;
-    previousNum = displayScreen.innerText;
+        if (total !== null) {
+            total = null;
+        }
+        numValue = this.value;
+        displayScreen.innerText = previousNum + numValue;
+        previousNum = displayScreen.innerText;
     }
     return previousNum;
 };
@@ -41,14 +45,14 @@ function allClear() {
 
 function backSpace() {
     let newText;
-    if (firstOperand === null) {
+    if (total === null) {
         newText = displayScreen.innerText.slice(0,-1);
         displayScreen.innerText = newText;
         previousNum = displayScreen.innerText;
     } else {
-        newText = String(firstOperand).slice(0,-1);
+        newText = String(total).slice(0,-1);
         displayScreen.innerText = newText
-        firstOperand = Number(newText);
+        total = Number(newText);
     }
 };
 
@@ -64,23 +68,24 @@ function addDecimal() {
 function changeSign() {
     if (displayScreen.innerText.includes("-")) {
         displayScreen.innerText = displayScreen.innerText.replace(/\W/, "");
-            if (firstOperand !== null) {
-                firstOperand = Math.abs(firstOperand);
+            if (total !== null) {
+                total = Math.abs(total);
             }
     } else {
         displayScreen.innerText = "-" + displayScreen.innerText;
             if (previousNum !== "") {
                 previousNum = -Math.abs(previousNum);
                 previousNum = previousNum.toString();
-            } else if (firstOperand !== null) {
-                firstOperand = -Math.abs(firstOperand);
+            } else if (total !== null) {
+                total = -Math.abs(total);
             }
     }
 };
 
 //stores operation entered to be called upon either when pressing '=' or entering new integer
 function operatorFunction() {
-    if (firstOperand !== null) {
+    if (total !== null) {
+            firstOperand = total;
             equalsFunction();
             operation = this.id;
     } else {
@@ -123,8 +128,8 @@ function add(num1, num2) {
         sum = String(sum).slice(0,13);
         displayScreen.innerText = sum;
     }; 
-    firstOperand = Number(sum);
-    return firstOperand;
+    total = Number(sum);
+    return total;
 };
 
 function subtract(num1, num2) {
@@ -136,8 +141,8 @@ function subtract(num1, num2) {
         difference = String(difference).slice(0,13);
         displayScreen.innerText = difference;
     }; 
-    firstOperand = Number(difference);
-    return firstOperand;
+    total = Number(difference);
+    return total;
 };
 
 function multiply(num1, num2) {
@@ -149,8 +154,8 @@ function multiply(num1, num2) {
         product = String(product).slice(0,13);
         displayScreen.innerText = product;
     }; 
-    firstOperand = Number(product)
-    return firstOperand;
+    total = Number(product)
+    return total;
 };
 
 function divide(num1,num2) {
@@ -162,8 +167,8 @@ function divide(num1,num2) {
         quotient = String(quotient).slice(0,13);
         displayScreen.innerText = quotient;
     }; 
-    firstOperand = Number(quotient);
-    return firstOperand;
+    total = Number(quotient);
+    return total;
 };
 
 displayScreen.innerText = `........(^_^).........`;
