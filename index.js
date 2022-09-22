@@ -22,8 +22,7 @@ let previousNum = ""; //holds previously entered number value as a string
 let total = null;
 
 //keyboard support 
-/*document.addEventListener('keyup', (event) => {
-    console.log(event);
+document.addEventListener('keydown', (event) => {
     if(event.key ==  "0") {keyValue()}
     else if(event.key ==  "1") {keyValue()}
     else if(event.key ==  "2") {keyValue()}
@@ -36,21 +35,7 @@ let total = null;
     else if(event.key ==  "9") {keyValue()}
     else if(event.key == "Backspace") {backSpace()}
     else if(event.key == ".") {addDecimal()}
-});*/
-document.addEventListener('keypress', (event) => {
-    if(event.key ==  "0") {keyValue()}
-    else if(event.key ==  "1") {keyValue()}
-    else if(event.key ==  "2") {keyValue()}
-    else if(event.key ==  "3") {keyValue()}
-    else if(event.key ==  "4") {keyValue()}
-    else if(event.key ==  "5") {keyValue()}
-    else if(event.key ==  "6") {keyValue()}
-    else if(event.key ==  "7") {keyValue()}
-    else if(event.key ==  "8") {keyValue()}
-    else if(event.key ==  "9") {keyValue()}
-    else if(event.key == "Backspace") {backSpace()}
-    else if(event.key == ".") {addDecimal()}
-    else if(event.key == "Enter") {console.log('enter'); equalsFunction()}
+    else if(event.key == "Enter") {equalsFunction()}
     else if(event.key == "+") {this.id = "add"; operatorFunction()}
     else if(event.key == "-") {this.id = "subtract"; operatorFunction()}
     else if(event.key == "*") {this.id = "multiply"; operatorFunction()}
@@ -148,14 +133,11 @@ function operatorFunction() {
         }
         previousNum = "";
     }
-    console.log(firstOperand);
     return firstOperand;
 };
 
 function equalsFunction() {
-    console.log(firstOperand);
     let secondOperand = Number(previousNum);
-    console.log(secondOperand);
     previousNum = "";
     if (operation == "add") {
         add(firstOperand,secondOperand);
@@ -171,16 +153,14 @@ function equalsFunction() {
         }
     }
     operation = null;
+    event.preventDefault();
 };
 
 //operation functions below
 function add(num1, num2) {
-    console.log(num1);
-    console.log(num2);
     let sum = num1 + num2;
     sum = String(sum).slice(0,13);
     displayScreen.innerText = sum;
-    console.log(displayScreen.innerText);
     total = Number(sum);
     return total;
 };
@@ -209,4 +189,4 @@ function divide(num1,num2) {
     return total;
 };
 
-displayScreen.innerText = `..........(^_^)...........`;
+displayScreen.innerText = `..........(^_^)...........`
