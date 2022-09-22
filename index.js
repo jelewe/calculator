@@ -13,7 +13,7 @@ const digits = document.querySelectorAll('.digit');
         digit.addEventListener('click', displayFunction)
 });
 
-//global variables defined below
+//global variables
 const displayScreen = document.querySelector('.display');
 let operation = null; //holds the operation (add, divide, etc) selected
 let firstOperand = null; //converts the first previousNum to number & saves it for operation, so previousNum can be cleared for reuse
@@ -21,7 +21,57 @@ let numValue = ""; //holds the value of number currently entered
 let previousNum = ""; //holds previously entered number value as a string
 let total = null;
 
-//displays digits selected
+//keyboard support 
+/*document.addEventListener('keyup', (event) => {
+    console.log(event);
+    if(event.key ==  "0") {keyValue()}
+    else if(event.key ==  "1") {keyValue()}
+    else if(event.key ==  "2") {keyValue()}
+    else if(event.key ==  "3") {keyValue()}
+    else if(event.key ==  "4") {keyValue()}
+    else if(event.key ==  "5") {keyValue()}
+    else if(event.key ==  "6") {keyValue()}
+    else if(event.key ==  "7") {keyValue()}
+    else if(event.key ==  "8") {keyValue()}
+    else if(event.key ==  "9") {keyValue()}
+    else if(event.key == "Backspace") {backSpace()}
+    else if(event.key == ".") {addDecimal()}
+});*/
+document.addEventListener('keypress', (event) => {
+    if(event.key ==  "0") {keyValue()}
+    else if(event.key ==  "1") {keyValue()}
+    else if(event.key ==  "2") {keyValue()}
+    else if(event.key ==  "3") {keyValue()}
+    else if(event.key ==  "4") {keyValue()}
+    else if(event.key ==  "5") {keyValue()}
+    else if(event.key ==  "6") {keyValue()}
+    else if(event.key ==  "7") {keyValue()}
+    else if(event.key ==  "8") {keyValue()}
+    else if(event.key ==  "9") {keyValue()}
+    else if(event.key == "Backspace") {backSpace()}
+    else if(event.key == ".") {addDecimal()}
+    else if(event.key == "Enter") {console.log('enter'); equalsFunction()}
+    else if(event.key == "+") {this.id = "add"; operatorFunction()}
+    else if(event.key == "-") {this.id = "subtract"; operatorFunction()}
+    else if(event.key == "*") {this.id = "multiply"; operatorFunction()}
+    else if(event.key == "/") {this.id = "divide"; operatorFunction()}
+})
+
+function keyValue() {
+    let keyNum;
+    keyNum = event.key;
+    if (previousNum.length > 12) {
+        return previousNum;
+    } else {
+        if (total !== null) {
+            total = null;
+        }
+    displayScreen.innerText = previousNum + keyNum;
+    previousNum = displayScreen.innerText;
+    }
+    return previousNum;
+};
+
 function displayFunction() {
     if (previousNum.length > 12) {
         return previousNum;
@@ -40,6 +90,7 @@ function allClear() {
     previousNum = "";
     firstOperand = null;
     operation = null;
+    total = null;
     displayScreen.innerText = "";
 };
 
@@ -82,7 +133,7 @@ function changeSign() {
     }
 };
 
-//stores operation entered to be called upon either when pressing '=' or entering new integer
+//stores operation entered to be called upon either when calling equals or entering new integer
 function operatorFunction() {
     if (total !== null) {
             firstOperand = total;
@@ -97,18 +148,22 @@ function operatorFunction() {
         }
         previousNum = "";
     }
+    console.log(firstOperand);
+    return firstOperand;
 };
 
 function equalsFunction() {
+    console.log(firstOperand);
     let secondOperand = Number(previousNum);
+    console.log(secondOperand);
     previousNum = "";
-    if (operation === "add") {
+    if (operation == "add") {
         add(firstOperand,secondOperand);
-    } else if (operation === "subtract") {
+    } else if (operation == "subtract") {
         subtract(firstOperand,secondOperand);
-    } else if (operation === "multiply") {
+    } else if (operation == "multiply") {
        multiply(firstOperand,secondOperand);
-    }else if (operation === "divide" ) {
+    }else if (operation == "divide" ) {
         if (secondOperand === 0) {
             displayScreen.innerText = "beep boop cannot compute";
         } else {
@@ -120,55 +175,38 @@ function equalsFunction() {
 
 //operation functions below
 function add(num1, num2) {
-    let sum;
-    sum = num1 + num2;
-    if (sum.length < 13) {
-        displayScreen.innerText = sum;
-    } else {
-        sum = String(sum).slice(0,13);
-        displayScreen.innerText = sum;
-    }; 
+    console.log(num1);
+    console.log(num2);
+    let sum = num1 + num2;
+    sum = String(sum).slice(0,13);
+    displayScreen.innerText = sum;
+    console.log(displayScreen.innerText);
     total = Number(sum);
     return total;
 };
 
 function subtract(num1, num2) {
-    let difference;
-    difference = num1 - num2;
-    if (difference.length < 13) {
-        displayScreen.innerText = difference
-    } else {
-        difference = String(difference).slice(0,13);
-        displayScreen.innerText = difference;
-    }; 
+    let difference = num1 - num2;
+    difference = String(difference).slice(0,13);
+    displayScreen.innerText = difference;
     total = Number(difference);
     return total;
 };
 
 function multiply(num1, num2) {
-    let product;
-    product = num1 * num2;
-    if (product.length < 13) {
-        displayScreen.innerText = product;
-    } else {
-        product = String(product).slice(0,13);
-        displayScreen.innerText = product;
-    }; 
+    let product = num1 * num2;
+    product = String(product).slice(0,13);
+    displayScreen.innerText = product;
     total = Number(product)
     return total;
 };
 
 function divide(num1,num2) {
-    let quotient;
-    quotient = num1 / num2;
-    if (quotient.length < 13) {
-        displayScreen.innerText = quotient;
-    } else {
-        quotient = String(quotient).slice(0,13);
-        displayScreen.innerText = quotient;
-    }; 
+    let quotient = num1 / num2;
+    quotient = String(quotient).slice(0,13);
+    displayScreen.innerText = quotient;
     total = Number(quotient);
     return total;
 };
 
-displayScreen.innerText = `........(^_^).........`;
+displayScreen.innerText = `..........(^_^)...........`;
